@@ -18,18 +18,12 @@ export const useAuth = () => {
     try {
         const res = await Login({email, password});
         setUser(res.user)
-        toast.success(res.message ?? "Log in successful",{
-                duration: 1500,
-                position: "top-right"
-            })
+        toast.success(res.message ?? "Log in successful")
         navigate("/")
 
     } catch (error) {
        const errorMessage = error.response?.data?.message || "Login failed";
-        toast.error(errorMessage,{
-                duration: 1500,
-                position: "top-right"
-            })
+        toast.error(errorMessage)
     } finally {
         setLoading(false)
     }
@@ -43,10 +37,7 @@ export const useAuth = () => {
         const res = await Register({userName, email, password});
         // console.log(res)
         setUser(res.user)
-        toast.success(res.message ?? "User created", {
-            position: "top-right",
-            duration: 1500
-        })
+        toast.success(res.message ?? "User created")
         navigate("/")
         } catch (error) {
             const errorMessage = error.response?.data?.message || "Internal server error";

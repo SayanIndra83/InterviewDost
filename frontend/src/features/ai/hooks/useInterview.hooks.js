@@ -21,19 +21,13 @@ export const useInterview =()=> {
             // console.log("got report", res)
             setReport(res.interviewReport)
             const newinterviewId = res.interviewReport._id;
-            toast.success(res.message ?? "Report generated",{
-                duration: 1500,
-                position: "top-right"
-            })
+            toast.success(res.message ?? "Report generated")
             navigate(`/interview/${newinterviewId}`)
         }
         catch(err){
             const errorMassage = err.response?.data?.message ?? "Report creation failed";
-            console.log(errorMassage)
-            toast.error(errorMassage,{
-                duration: 1500,
-                position: "top-right"
-            })
+            // console.log(errorMassage)
+            toast.error(errorMassage)
         }
         finally{
             setLoading(false)
@@ -51,10 +45,7 @@ export const useInterview =()=> {
             setReport(res.report);
         } catch (err) {
             const errorMassage = err.response?.data?.message || "Something went wrong";
-            toast.error(errorMassage,{
-                duration: 1500,
-                position: "top-right"
-            })
+            toast.error(errorMassage)
         }
         finally{
             setLoading(false)
@@ -69,10 +60,7 @@ export const useInterview =()=> {
             setReports(res.reports)
         } catch (err) {
             const errorMassage = err.response?.data?.message || "Something went wrong";
-            toast.error(errorMassage,{
-                duration: 1500,
-                position: "top-right"
-            })
+            toast.error(errorMassage)
         }
         finally{
             setLoading(false)
@@ -92,16 +80,10 @@ export const useInterview =()=> {
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
-            toast.success("Tailored resume created",{
-                duration: 1500,
-                position: "top-right"
-            })
+            toast.success("Tailored resume created")
         } catch (err) {
             const errorMassage = err.response?.data?.message || "Something went wrong";
-            toast.error(errorMassage,{
-                duration: 1500,
-                position: "top-right"
-            })
+            toast.error(errorMassage)
         }
         finally{
             setLoading(false)       
