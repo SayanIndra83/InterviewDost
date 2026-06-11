@@ -7,7 +7,7 @@ import toast from 'react-hot-toast'
 export const useInterview =()=> {
 
     const navigate = useNavigate();
-
+    const {interviewId} = useParams()
     const context = useContext(InterviewContext)
     const {report, setLoading, loading, setReport, reports, setReports} = context
 
@@ -20,12 +20,12 @@ export const useInterview =()=> {
 
             // console.log("got report", res)
             setReport(res.interviewReport)
-            const interviewId = res.interviewReport._id;
+            const newinterviewId = res.interviewReport._id;
             toast.success(res.message ?? "Report generated",{
                 duration: 1500,
                 position: "top-right"
             })
-            navigate(`/interview/${interviewId}`)
+            navigate(`/interview/${newinterviewId}`)
         }
         catch(err){
             const errorMassage = err.response?.data?.message ?? "Report creation failed";
