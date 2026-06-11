@@ -102,13 +102,17 @@ async function generatePdf({ htmlContent }) {
         
         const page = await browser.newPage();
         
-        await page.setContent(htmlContent, { waitUntil: 'networkidle0' });
+        await page.setContent(htmlContent, {
+    waitUntil: 'domcontentloaded',
+    timeout: 60000
+});
         
         // Generate the PDF
         const pdfBuffer = await page.pdf({ 
             format: 'A4',
             margin:{top: "20mm", right: "15mm", bottom: "20mm", left: "15mm"}, 
-            printBackground: true 
+            printBackground: true ,
+            timeout: 60000
         });
         
         return pdfBuffer;
