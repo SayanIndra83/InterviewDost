@@ -34,13 +34,13 @@ jobs:
         run: npm run build
       
       - name: Copy index.html to 404.html
-        run: cp ./frontend/dist/index.html ./frontend/dist/404.html
+        run: cp ./frontend/index.html ./frontend/404.html
 
       
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./frontend/dist
+          path: ./frontend
 
   deploy:
     environment:
