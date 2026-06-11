@@ -7,8 +7,8 @@ const registerUser = async (req, res) => {
     try {
         // getting datas from body
         const { userName, email, password } = req.body;
-        console.log("got response from body:", req.body)
-        console.log("Hello")
+        // console.log("got response from body:", req.body)
+        // console.log("Hello")
         // if any field is empty
         if ([userName, email, password].some((field) => !field || field?.trim() === "")) {
             return res.status(400).json({
@@ -85,7 +85,7 @@ const loginUser = async (req, res) => {
 
         // now check the password is correct or not
         const isPasswordCorrect = await bcrypt.compare(password, existingUser.password)
-        console.log(isPasswordCorrect)
+        // console.log(isPasswordCorrect)
         if (!isPasswordCorrect) {
             return res.status(401).json({ success: false, message: "Invalid credentials" })
         }
