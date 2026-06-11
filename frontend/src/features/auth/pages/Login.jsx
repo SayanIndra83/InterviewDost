@@ -25,7 +25,7 @@ function Login() {
 );
 
   return (
-    <main className="auth-page">
+    <main className="auth-page"> 
       
       {isSubmitting && loading && (
         <div className="submission-overlay">
