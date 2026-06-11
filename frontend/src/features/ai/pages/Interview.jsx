@@ -176,7 +176,7 @@ function Interview() {
           </button>
         </aside>
 
-        {/* MAIN CENTER CONTENT */}
+        
         <section className="main-content">
           <div className="mobile-topbar">
               <button className="hamburger-btn" onClick={() => setIsSidebarOpen(true)}>

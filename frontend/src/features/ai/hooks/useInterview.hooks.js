@@ -82,7 +82,8 @@ export const useInterview =()=> {
             document.body.removeChild(link);
             toast.success("Tailored resume created")
         } catch (err) {
-            const errorMassage = err.response?.data?.message || "Something went wrong";
+            const errorMassage = err.response?.data?.message ?? "Something went wrong";
+            console.log(err)
             toast.error(errorMassage)
         }
         finally{
