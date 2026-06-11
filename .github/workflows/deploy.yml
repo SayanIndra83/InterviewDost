@@ -34,7 +34,7 @@ jobs:
         run: npm run build
       
       - name: Copy index.html to 404.html
-        run: cp ./frontend/index.html ./frontend/404.html
+        run: cp dist/index.html dist/404.html
 
       
       - name: Upload artifact
