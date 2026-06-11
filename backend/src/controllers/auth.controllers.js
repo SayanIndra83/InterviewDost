@@ -46,7 +46,12 @@ const registerUser = async (req, res) => {
             return res.status(400).json({ success: false, message: "Failed to create a new user" })
         }
         // return json with user
-        res.cookie("token", token)
+        const cookieOptions = {
+            httpOnly: true, // Prevents JavaScript from accessing the cookie (security)
+            secure: true,   // Requires HTTPS (which Render and GitHub Pages both use)
+            sameSite: "none" // CRITICAL: Allows cross-origin cookies!
+        };
+        res.cookie("token", token, cookieOptions)
         return res.status(201).json({
             success: true,
             message: "User created successfully",
@@ -95,7 +100,13 @@ const loginUser = async (req, res) => {
         )
 
 
-        res.cookie("token", token)
+        const cookieOptions = {
+            httpOnly: true, // Prevents JavaScript from accessing the cookie (security)
+            secure: true,   // Requires HTTPS (which Render and GitHub Pages both use)
+            sameSite: "none" // CRITICAL: Allows cross-origin cookies!
+        };
+
+        res.cookie("token", token, cookieOptions)
         return res.status(201).json({
             success: true,
             user:{

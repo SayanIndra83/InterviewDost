@@ -33,7 +33,6 @@ export async function Login({email, password}) {
 export async function Logout() {
     try {
         const res = await auth.get(`/api/auth/logout`)
-
         return res.data
     } catch (error) {
         throw error;
