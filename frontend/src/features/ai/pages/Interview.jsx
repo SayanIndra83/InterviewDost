@@ -23,7 +23,6 @@ function Interview() {
     }
     else{
       navigate('/')
-      return null;
     }
   }, [interviewId]);
 
