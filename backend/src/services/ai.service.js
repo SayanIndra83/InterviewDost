@@ -93,17 +93,15 @@ async function generateInterviewReport({resume, selfDescription, jobDescription}
 }
 
 async function generatePdf({ htmlContent }) {
-    let browser; // Declare here so the 'finally' block can reach it
+    let browser;
 
     try {
-        // Added server-safe args
         browser = await puppeteer.launch({
-            args: ['--no-sandbox', '--disable-setuid-sandbox'] 
+            args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'] 
         });
         
         const page = await browser.newPage();
         
-        // Load the HTML
         await page.setContent(htmlContent, { waitUntil: 'networkidle0' });
         
         // Generate the PDF
@@ -158,7 +156,7 @@ async function ResumePdf ({jobDescription, resume, selfDescription}){
 
 const jsonContent = JSON.parse(response.text);
 
-const pdf = generatePdf({htmlContent: jsonContent.html})
+const pdf = await generatePdf({htmlContent: jsonContent.html})
 return pdf;
 
     } catch (error) {

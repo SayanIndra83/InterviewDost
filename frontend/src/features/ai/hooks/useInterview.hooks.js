@@ -80,6 +80,7 @@ export const useInterview =()=> {
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
+            window.URL.revokeObjectURL(url);
             toast.success("Tailored resume created")
         } catch (err) {
             const errorMassage = err.response?.data?.message ?? "Something went wrong";
