@@ -7,7 +7,8 @@ import Interview from "./features/ai/pages/Interview.jsx"
 import AppLayout from "./layout/AppLayout.jsx"
 
 
-export const router = createBrowserRouter([
+export const router = createBrowserRouter(
+    [
     {
         path:"/login",
         element:<Login/>
@@ -34,4 +35,7 @@ children:[
         ]
     }
     
-])
+],
+{
+    basename: '/Interview-Ai'
+})
