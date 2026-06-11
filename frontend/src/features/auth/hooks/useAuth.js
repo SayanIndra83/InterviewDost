@@ -21,7 +21,7 @@ export const useAuth = () => {
 
     } catch (error) {
        const errorMessage = error.response?.data?.message || "Login failed";
-            alert(errorMessage)
+        alert(errorMessage)
     } finally {
         setLoading(false)
     }
