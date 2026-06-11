@@ -1,0 +1,328 @@
+// Theme Variables
+$bg-body: #050508; 
+$glass-bg: rgba(20, 20, 25, 0.7); 
+$border-glass: rgba(255, 255, 255, 0.08); 
+$accent-pink: #f42c6c;      
+$accent-pink-light: #ff4b82;
+$text-light: #f8fafc;
+$text-muted: #8b96a5;
+$input-bg: rgba(10, 10, 14, 0.8);
+$smooth-transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+
+* {
+    box-sizing: border-box;
+}
+
+.auth-page {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $bg-body;
+    color: $text-light;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+
+    .ambient-glow {
+        position: absolute;
+        width: 500px;
+        height: 500px;
+        background: rgba($accent-pink, 0.15);
+        border-radius: 50%;
+        filter: blur(100px);
+        z-index: 0;
+        pointer-events: none;
+
+        &.glow-top { top: -200px; right: -100px; }
+    }
+}
+
+.glass-card {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 420px;
+    background: $glass-bg;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid $border-glass;
+    border-radius: 1.5rem;
+    padding: 3rem 2.5rem 2.5rem 2.5rem; // Increased top padding to breathe with the back button
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+
+    // --- NEW: Back Button Styling ---
+    .back-button {
+        position: absolute;
+        top: 1.25rem;
+        left: 1.25rem;
+        color: $text-muted;
+        background: transparent;
+        border: 1px solid transparent;
+        border-radius: 50%;
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: $smooth-transition;
+        text-decoration: none;
+
+        &:hover {
+            color: $text-light;
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.1);
+            transform: translateX(-3px); // Slides left smoothly on hover
+        }
+    }
+}
+
+.form-header {
+    text-align: center;
+    margin-bottom: 2.25rem;
+
+    .heading {
+        font-size: 1.85rem;
+        font-weight: 800;
+        margin: 0 0 0.5rem 0;
+        letter-spacing: -0.5px;
+        // Added a premium gradient to make the text pop
+        background: linear-gradient(135deg, $text-light 0%, #b4bed0 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .sub-heading {
+        color: $text-muted;
+        font-size: 0.95rem;
+        margin: 0;
+    }
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    label {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #cbd5e1;
+        margin-left: 0.25rem;
+    }
+
+    .input-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+
+        .input-icon {
+            position: absolute;
+            left: 1rem;
+            color: #64748b;
+            transition: $smooth-transition;
+        }
+
+        input {
+            width: 100%;
+            background: $input-bg;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: $text-light;
+            font-size: 0.95rem;
+            padding: 0.75rem 1rem 0.75rem 2.75rem; 
+            border-radius: 0.75rem;
+            outline: none;
+            transition: $smooth-transition;
+
+            &::placeholder { color: #52525b; }
+
+            &:focus {
+                border-color: rgba($accent-pink, 0.5);
+                box-shadow: 0 0 0 4px rgba($accent-pink, 0.1);
+            }
+        }
+
+        &:focus-within {
+            .input-icon { color: $accent-pink; }
+        }
+    }
+}
+
+.form-options {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    font-size: 0.85rem;
+    margin-top: -0.25rem;
+
+    .remember-me {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: $text-muted;
+        cursor: pointer;
+
+        input[type="checkbox"] {
+            accent-color: $accent-pink;
+            cursor: pointer;
+        }
+    }
+}
+
+.button {
+    border: none;
+    outline: none;
+    border-radius: 0.75rem;
+    padding: 0.85rem;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 0.5rem;
+    transition: $smooth-transition;
+    
+    &.primary-button {
+        background: linear-gradient(135deg, $accent-pink 0%, $accent-pink-light 100%);
+        color: white;
+        font-weight: 700;
+        box-shadow: 0 4px 15px rgba($accent-pink, 0.3);
+    }
+
+    &:active { transform: scale(0.98); }
+    
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba($accent-pink, 0.4);
+    }
+}
+
+.auth-footer {
+    text-align: center;
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+    color: $text-muted;
+
+    a {
+        color: $accent-pink;
+        text-decoration: none;
+        font-weight: 600;
+        margin-left: 0.25rem;
+        transition: $smooth-transition;
+
+        &:hover {
+            color: $accent-pink-light;
+            text-decoration: underline;
+        }
+    }
+}
+
+.loader {
+    font-size: 1.2rem;
+    color: $text-muted;
+    font-weight: 600;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+.submission-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 50;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba($bg-body, 0.4);
+    backdrop-filter: blur(8px);
+    border-radius: 1.5rem;
+    animation: fadeIn 0.3s ease-out;
+}
+
+
+.silent-loader-container {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: $bg-body;
+    z-index: 10000;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 2px;
+        width: 100%;
+        background: linear-gradient(90deg, transparent, $accent-pink, transparent);
+        background-size: 200% 100%;
+        animation: loading-bar-flow 1.5s infinite linear;
+    }
+
+    .loader-text-tiny {
+        font-size: 0.7rem;
+        font-weight: 600;
+        color: rgba($text-light, 0.4);
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        margin-top: 1rem;
+    }
+}
+
+@keyframes loading-bar-flow {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+.loader-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+
+    .spinner {
+        width: 32px;
+        height: 32px;
+        border: 3px solid rgba($accent-pink, 0.1);
+        border-top-color: $accent-pink;
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+    }
+
+    .loader-text {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: white;
+        background: linear-gradient(90deg, #fff, $text-muted, #fff);
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: text-shimmer 2s linear infinite;
+    }
+}
+
+.dimmed {
+    filter: grayscale(0.5) blur(2px);
+    pointer-events: none;
+    user-select: none;
+}
+
+@keyframes pulse-simple {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 0.8; }
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes text-shimmer { to { background-position: 200% center; } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
