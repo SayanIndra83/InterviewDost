@@ -43,7 +43,7 @@ const registerUser = async (req, res) => {
         // check if user created otherwise throw error
 
         if (!user) {
-            return res.status(400).json({ success: false, message: "Failed to create a new user" })
+            return res.status(400).json({ success: false, message: "Internal server error" })
         }
         // return json with user
         const cookieOptions = {
@@ -65,7 +65,7 @@ const registerUser = async (req, res) => {
         console.log("Internal server error during registration.", error)
         return res.status(500).json({
             success: false,
-            message: "Internal server error during registration.",
+            message: "Internal server error",
         })
         
     }
@@ -112,7 +112,8 @@ const loginUser = async (req, res) => {
             user:{
                 email,
                 username: existingUser.userName,
-                _id: existingUser._id
+                _id: existingUser._id,
+                token
 
             },
             message: "User successfully logged in."

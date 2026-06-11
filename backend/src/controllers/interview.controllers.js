@@ -64,7 +64,7 @@ const resumeContent = await (new pdfParse.PDFParse(uint8ArrayData)).getText();
     
     // console.log("Database creationg done successfully", interviewReport)
     return res.status(200).json({
-        message: "Interview Report generated successfully !",
+        message: "Report generated",
         interviewReport
     })
 } catch (error) {
@@ -79,10 +79,8 @@ const resumeContent = await (new pdfParse.PDFParse(uint8ArrayData)).getText();
 const getReport = async (req, res) => {
 try {
         const {interviewId} = req.params
-        // console.log("Req.params", req.params, req.user)
-    
+        console.log("Req.params", req.params, req.user)
         const report = await Report.findOne({_id: interviewId, user: req.user._id});
-    
         if(!report){
             return res.status(404).json({
                 success: false,

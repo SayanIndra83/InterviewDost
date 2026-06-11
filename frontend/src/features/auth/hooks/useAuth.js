@@ -2,6 +2,7 @@ import { useContext } from "react";
 import {AuthContext} from "../auth.context.jsx"
 import {getMe, Login, Register, Logout} from "../services/auth.api.js"
 import { useNavigate } from "react-router";
+import toast from "react-hot-toast";
 export const useAuth = () => {
 
     const navigate = useNavigate()
@@ -17,11 +18,18 @@ export const useAuth = () => {
     try {
         const res = await Login({email, password});
         setUser(res.user)
+        toast.success(res.message ?? "Log in successful",{
+                duration: 1500,
+                position: "top-right"
+            })
         navigate("/")
 
     } catch (error) {
        const errorMessage = error.response?.data?.message || "Login failed";
-        alert(errorMessage)
+        toast.error(errorMessage,{
+                duration: 1500,
+                position: "top-right"
+            })
     } finally {
         setLoading(false)
     }
@@ -35,10 +43,17 @@ export const useAuth = () => {
         const res = await Register({userName, email, password});
         // console.log(res)
         setUser(res.user)
+        toast.success(res.message ?? "User created", {
+            position: "top-right",
+            duration: 1500
+        })
         navigate("/")
         } catch (error) {
-            const errorMessage = error.response?.data?.message || "Signup failed";
-            alert(errorMessage)
+            const errorMessage = error.response?.data?.message || "Internal server error";
+            toast.error(errorMessage,{
+                duration: 1500,
+                position: "top-right"
+            })
         } finally {
             setLoading(false)
         }
@@ -51,7 +66,10 @@ export const useAuth = () => {
             setUser(null)
         } catch (error) {
             const errorMessage = error.response?.data?.message || "Logout failed";
-            alert(errorMessage)
+            toast.error(errorMessage,{
+                duration: 1500,
+                position: "top-right"
+            })
         } finally {
             setLoading(false)
         }

@@ -2,14 +2,13 @@ import { useContext, useEffect } from "react"
 import { InterviewContext } from "../interview.context.jsx"
 import { generateReport, getReport, getReports, getResume} from "../services/interview.api.js"
 import { useNavigate, useParams } from "react-router"
-
+import toast from 'react-hot-toast'
 
 export const useInterview =()=> {
 
     const navigate = useNavigate();
 
     const context = useContext(InterviewContext)
-    const {interviewId} = useParams()
     const {report, setLoading, loading, setReport, reports, setReports} = context
 
     const generateAiReport = async ({resumeFile, selfDescription, jobDescription}) => {
@@ -17,16 +16,24 @@ export const useInterview =()=> {
         try {
             setLoading(true)
             // console.log("Resume sent to generateReport")
-            const res = await generateReport({resumeFile, selfDescription, jobDescription})
+            res = await generateReport({resumeFile, selfDescription, jobDescription})
 
             // console.log("got report", res)
             setReport(res.interviewReport)
+            const interviewId = res.interviewReport._id;
+            toast.success(res.message ?? "Report generated",{
+                duration: 1500,
+                position: "top-right"
+            })
             navigate(`/interview/${interviewId}`)
         }
         catch(err){
-            const errorMassage = err.response?.data?.message || "Report creation failed";
+            const errorMassage = err.response?.data?.message ?? "Report creation failed";
             console.log(errorMassage)
-            alert(errorMassage)
+            toast.error(errorMassage,{
+                duration: 1500,
+                position: "top-right"
+            })
         }
         finally{
             setLoading(false)
@@ -44,7 +51,10 @@ export const useInterview =()=> {
             setReport(res.report);
         } catch (err) {
             const errorMassage = err.response?.data?.message || "Something went wrong";
-            alert(errorMassage)
+            toast.error(errorMassage,{
+                duration: 1500,
+                position: "top-right"
+            })
         }
         finally{
             setLoading(false)
@@ -58,8 +68,11 @@ export const useInterview =()=> {
             const res = await getReports();
             setReports(res.reports)
         } catch (err) {
-            // const errorMassage = err.response?.data?.message || "Something went wrong";
-            // alert(errorMassage)
+            const errorMassage = err.response?.data?.message || "Something went wrong";
+            toast.error(errorMassage,{
+                duration: 1500,
+                position: "top-right"
+            })
         }
         finally{
             setLoading(false)
@@ -79,9 +92,16 @@ export const useInterview =()=> {
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
+            toast.success("Tailored resume created",{
+                duration: 1500,
+                position: "top-right"
+            })
         } catch (err) {
             const errorMassage = err.response?.data?.message || "Something went wrong";
-            alert(errorMassage)
+            toast.error(errorMassage,{
+                duration: 1500,
+                position: "top-right"
+            })
         }
         finally{
             setLoading(false)       

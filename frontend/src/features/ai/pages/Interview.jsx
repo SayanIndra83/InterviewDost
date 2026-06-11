@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Code, MessageSquare, Map, ChevronDown, X, Target, Lightbulb, Menu, Sparkles } from 'lucide-react';
 import "../style/interview.style.scss";
 import { useInterview } from '../hooks/useInterview.hooks';
-import { useParams } from 'react-router-dom';
+import {  useNavigate, useParams } from 'react-router-dom';
 
 function Interview() {
   const { loading, report, getAiReport, ResumePdf } = useInterview();
@@ -16,9 +16,14 @@ function Interview() {
 
   const { interviewId } = useParams();
   
+  const navigate = useNavigate()
   useEffect(() => {
     if (interviewId) {
       getAiReport(interviewId);
+    }
+    else{
+      navigate('/')
+      return null;
     }
   }, [interviewId]);
 
