@@ -131,7 +131,7 @@ const loginUser = async (req, res) => {
 
 const logoutUser = async(req, res) => {
     try {
-         const token = req.cookies.token;
+         const token = req.cookies.token || req.headers.authorization?.split(" ")[1];
 
         //  console.log("Logging out user:",req.user)
         // console.log("Logout token: ", token)
