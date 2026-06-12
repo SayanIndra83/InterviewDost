@@ -42,7 +42,7 @@ $smooth-transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     display: flex;
     justify-content: center;
     align-items: center;
-    height: calc(100vh - 70px);
+    height: 100vh;
     padding-top: 0px;
     background: $bg-body;
     &::before, .ambient-background { display: none; } 
@@ -140,11 +140,13 @@ $smooth-transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         font-weight: 600; cursor: pointer; transition: $smooth-transition;
         &:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba($accent-pink, 0.3); }
         &:active{background: $accent-pink;}
-    }
-    .loader-gen{
-        height: 1.1rem;
-        width: 1.1rem;
-        animation: spi;
+        &:disabled , &.is-loading{
+            opacity: 0.6;
+            cursor: not-allowed;
+            pointer-events: none;
+            box-shadow: none;
+            transform: none;
+        }
     }
 
     @media (max-width: 900px) {

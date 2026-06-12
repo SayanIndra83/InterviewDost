@@ -113,9 +113,10 @@ function Interview() {
     </div>
   );
 
-  const handleSubmit = ()=>{
+  const handleSubmit = async()=>{
     setIsDownload(true)
-    ResumePdf(interviewId)
+    await ResumePdf(interviewId)
+    setIsDownload(false)
   }
 
   return (
@@ -165,9 +166,9 @@ function Interview() {
             </button>
           </nav>
 
-          <button className="button primary-button download-btn" 
+          <button className={`button primary-button download-btn ${isDownload ? 'is-loading': ''} `}
           onClick={() => {handleSubmit()}}
-          disabled={loading || isDownload}
+          disabled={isDownload}
           >
             {loading || isDownload ? (
               <>
