@@ -6,7 +6,7 @@ import { useAuth } from '../features/auth/hooks/useAuth.js';
 
 
 function Navbar() {
-    const navigate = useNavigate()
+  const navigate = useNavigate()
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
   const {user,handleLogout} = useAuth()
@@ -30,7 +30,7 @@ function Navbar() {
 
   return (
     <nav className="global-navbar">
-      <Link to="/" className="nav-brand">
+    <Link to="/" className="nav-brand">
   <div className="brand-icon-wrapper">
     <Sparkles className="icon-accent" size={19} />
   </div>
