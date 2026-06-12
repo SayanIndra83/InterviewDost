@@ -4,6 +4,7 @@ import "../style/home.style.scss";
 import { useInterview } from '../hooks/useInterview.hooks.js';
 import { useNavigate } from 'react-router';
 import { useAuth } from '../../auth/hooks/useAuth.js';
+import toast from 'react-hot-toast';
 
 const GithubIcon = ({ size = 24 }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -47,7 +48,7 @@ function Home() {
     }
     const resumeFile = resumeInputRef.current.files[0]
     if (!resumeFile) {
-        alert("Please upload your resume (.pdf or .docx) to generate the report.");
+        toast("Please upload your resume (.pdf or .docx) to generate the report.");
         return;
     }
      await generateAiReport({resumeFile, selfDescription, jobDescription})
@@ -57,7 +58,7 @@ function Home() {
     if(file){
       if (e.target.files.length > 0) {
       if (file.size > 3145728) {
-        alert("Resume file size exceeds the 3MB limit. Please upload a smaller file.");
+        toast("Resume file size exceeds the 3MB limit. Please upload a smaller file.");
         e.target.value = null;
         setFileName(""); 
         return;
