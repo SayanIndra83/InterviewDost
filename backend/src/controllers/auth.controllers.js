@@ -47,10 +47,10 @@ const registerUser = async (req, res) => {
         }
         // return json with user
         const cookieOptions = {
-            httpOnly: true, // Prevents JavaScript from accessing the cookie (security)
-            secure: true,   // Requires HTTPS (which Render and GitHub Pages both use)
-            sameSite: "none" // CRITICAL: Allows cross-origin cookies!
-        };
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production", 
+        sameSite: "lax"
+    }
         res.cookie("token", token, cookieOptions)
         return res.status(201).json({
             success: true,
@@ -100,11 +100,11 @@ const loginUser = async (req, res) => {
         )
 
 
-        const cookieOptions = {
-            httpOnly: true, // Prevents JavaScript from accessing the cookie (security)
-            secure: true,   // Requires HTTPS (which Render and GitHub Pages both use)
-            sameSite: "none" // CRITICAL: Allows cross-origin cookies!
-        };
+       const cookieOptions = {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production", 
+        sameSite: "lax"
+        }
 
         res.cookie("token", token, cookieOptions)
         return res.status(201).json({
