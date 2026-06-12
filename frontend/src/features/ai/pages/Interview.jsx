@@ -32,10 +32,10 @@ function Interview() {
   const strokeDashoffset = circumference - (displayScore / 100) * circumference;
   
   const scoreColor = displayScore >= 80 ? '#22c55e' : displayScore >= 60 ? '#eab308' : '#ef4444';
-  const scoreText = displayScore >= 80 ? 'Strong match for this role' : displayScore >= 60 ? 'Moderate match for this role' : 'Low match for this role';
+  const scoreText = displayScore >= 80 ? 'Strong' : displayScore >= 60 ? 'Moderate' : 'Low';
 
   useEffect(() => {
-    if (!report) return;
+    if (!targetScore) return;
     let start = 0;
     const duration = 2000; 
     const increment = targetScore / (duration / 16);
@@ -51,7 +51,7 @@ function Interview() {
     }, 16);
     
     return () => clearInterval(timer);
-  }, [targetScore, report]);
+  }, [targetScore]);
 
   if ((loading || !report)&& !isDownload) return (
    <main className="interview-page loading-state">
@@ -167,9 +167,9 @@ function Interview() {
 
           <button className="button primary-button download-btn" 
           onClick={() => {handleSubmit()}}
-          disabled={loading && isDownload}
+          disabled={loading || isDownload}
           >
-            {loading && isDownload ? (
+            {loading || isDownload ? (
               <>
              <svg 
         className="loading-spark" 
