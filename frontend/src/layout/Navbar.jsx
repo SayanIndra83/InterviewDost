@@ -29,7 +29,6 @@ function Navbar() {
   };
 
   return (
-    <div className='global-div'>
       <nav className="global-navbar">
     <Link to="/" className="nav-brand">
   <div className="brand-icon-wrapper">
@@ -93,7 +92,6 @@ function Navbar() {
         )}
       </div>
     </nav>
-    </div>
   );
 }
 
