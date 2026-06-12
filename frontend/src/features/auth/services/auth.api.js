@@ -1,8 +1,7 @@
 import axios from "axios"
 
 const auth = axios.create({
-    // baseURL: import.meta.env.VITE_SERVER_URL,
-    baseURL:'',
+    baseURL: import.meta.env.VITE_SERVER_URL,
     withCredentials: true
 })
 export async function Register({userName, email, password}) {
