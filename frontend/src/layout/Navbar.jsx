@@ -29,7 +29,8 @@ function Navbar() {
   };
 
   return (
-    <nav className="global-navbar">
+    <div className='global-div'>
+      <nav className="global-navbar">
     <Link to="/" className="nav-brand">
   <div className="brand-icon-wrapper">
     <Sparkles className="icon-accent" size={19} />
@@ -92,6 +93,7 @@ function Navbar() {
         )}
       </div>
     </nav>
+    </div>
   );
 }
 

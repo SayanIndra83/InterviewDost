@@ -10,7 +10,9 @@ $smooth-transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 
 *, *::before, *::after { box-sizing: border-box; }
 body { margin: 0; overflow-x: hidden; }
-
+.global-div{
+    position: relative;
+}
 .global-navbar {
     position: sticky; top: 0; z-index: 1000;
     width: 100%; height: 70px; padding: 0 0.75rem;
