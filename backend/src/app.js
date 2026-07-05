@@ -10,7 +10,7 @@ app.use(cors({
     origin: [
         'http://localhost:5173', 
         'http://10.143.198.243:5173',
-        'https://sayanindra83.github.io'
+        'https://sayanindra83.github.io/InterviewDost'
     ],
     credentials: true
 }))

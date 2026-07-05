@@ -47,10 +47,12 @@ const registerUser = async (req, res) => {
         }
         // return json with user
         const cookieOptions = {
-            httpOnly: true, // Prevents JavaScript from accessing the cookie (security)
-            secure: true,   // Requires HTTPS (which Render and GitHub Pages both use)
-            sameSite: "none" // CRITICAL: Allows cross-origin cookies!
-        };
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'none',
+        maxAge: 7 * 24 * 60 * 60 * 1000,
+    }
+
         res.cookie("token", token, cookieOptions)
         return res.status(201).json({
             success: true,
@@ -101,11 +103,12 @@ const loginUser = async (req, res) => {
 
 
         const cookieOptions = {
-            httpOnly: true, // Prevents JavaScript from accessing the cookie (security)
-            secure: true,   // Requires HTTPS (which Render and GitHub Pages both use)
-            sameSite: "none" // CRITICAL: Allows cross-origin cookies!
-        };
-
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'none',
+        maxAge: 7 * 24 * 60 * 60 * 1000,
+    }
+    
         res.cookie("token", token, cookieOptions)
         return res.status(201).json({
             success: true,
