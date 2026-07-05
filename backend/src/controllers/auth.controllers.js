@@ -49,7 +49,7 @@ const registerUser = async (req, res) => {
         const cookieOptions = {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
-        sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'none',
+        sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
         maxAge: 7 * 24 * 60 * 60 * 1000,
     }
 
@@ -105,10 +105,10 @@ const loginUser = async (req, res) => {
         const cookieOptions = {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
-        sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'none',
+        sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
         maxAge: 7 * 24 * 60 * 60 * 1000,
-    }
-    
+        }
+
         res.cookie("token", token, cookieOptions)
         return res.status(201).json({
             success: true,
@@ -156,7 +156,14 @@ const logoutUser = async(req, res) => {
         const db_token = await Blacklisttoken.create({token})
         // console.log("Db response: ", db_token)
 
-        res.clearCookie("token")
+        const cookieOptions = {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+        maxAge: 7 * 24 * 60 * 60 * 1000,
+        }
+
+        res.clearCookie("token", cookieOptions)
 
         // console.log("successfully logged out")
             return res.status(201).json({
