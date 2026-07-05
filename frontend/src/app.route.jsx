@@ -37,5 +37,5 @@ children:[
     
 ],
 {
-    basename: '/Interview-Ai'
+    basename: '/InterviewDost'
 }) 
