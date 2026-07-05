@@ -19,6 +19,8 @@ useEffect(() => {
             
         } catch (error) {
             setUser(null)
+            localStorage.removeItem("token")
+            localStorage.removeItem("user")
         }finally{
             setLoading(false)
         }

@@ -61,7 +61,8 @@ const registerUser = async (req, res) => {
                 username: user.userName,
                 email: user.email,
                 _id: user._id
-            }
+            },
+            token
         })
     } catch (error) {
         console.log("Internal server error during registration.", error)
@@ -116,9 +117,8 @@ const loginUser = async (req, res) => {
                 email,
                 username: existingUser.userName,
                 _id: existingUser._id,
-                token
-
             },
+            token,
             message: "User successfully logged in."
         })
 
